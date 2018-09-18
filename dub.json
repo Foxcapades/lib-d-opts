@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pure-D/code-d/master/json-validation/dub.schema.json",
+  "name": "d-opts",
+  "authors": [
+    "Elizabeth Harper"
+  ],
+  "description": "Argument parser",
+  "license": "MIT",
+  "targetType": "autodetect",
+  "targetPath": "bin"
+}
+

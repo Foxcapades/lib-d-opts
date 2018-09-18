@@ -1,0 +1,52 @@
+= CLI Arg Parser
+:source-highlighter: pygments
+:icons: font
+
+A clumsy and inconvenient CLI argument parser written in D.
+
+== Features
+
+* Short flags `-f`
+** With optional values `-f [value]`
+** With mandatory values `-f <value>`
+** That can be specified multiple times `-f -f -fff`
+* Long flags `--foo`
+** With optional values `--foo[=value]`
+** With mandatory values `--foo=<value>`
+** That can be specified multiple times `--foo --foo -ff --foo`
+* Positional parameters
+
+.app.d
+[source, d]
+----
+import std.stdio;
+
+import eph.args;
+
+void main(const string[] args)
+{
+  Argument  count = new Argument().shortFlag('c');
+  Argument  flag  = new Argument().longFlag("flag").shortFlag('f').requireParam();
+  Parameter param = new Parameter();
+  ArgParser parse = new ArgParser().register(count, flag).register(param);
+
+  parse.parse(args);
+
+  writefln("count: %d", count.uses());
+  writefln("flag: %s", flag.values());
+  writefln("param: %s", param.value());
+  writefln("extra (unknown values): %s", parse.remainder());
+  writefln("passthrough: %s", parse.passthrough());
+}
+----
+
+.run
+[source, bash session]
+----
+$ ./app -cffoo -ccc --flag=bar fizz buzz -- some passthrough values
+count: 4
+flag: ["foo", "bar"]
+param: fizz
+extra (unknown values): ["buzz"]
+passthrough: ["some", "passthrough", "values"]
+----
