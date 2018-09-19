@@ -69,7 +69,7 @@ public class Argument {
    * Returns whether or not this argument has a long flag
    * set.
    */
-  public bool hasLongFrom() const {
+  public bool hasLongFlag() const {
     return lFlag != "";
   }
 
@@ -82,14 +82,14 @@ public class Argument {
   }
 
   /**
-   * Returns whether or not this argument is required.
+   * Returns whether or not this Argument is required.
    */
   public bool required() const {
     return isRequired;
   }
 
   /**
-   * Sets this argument to require a parameter value.
+   * Sets this Argument to require a parameter value.
    */
   public Argument requireParam() {
     hasParam = true;
@@ -98,7 +98,7 @@ public class Argument {
   }
 
   /**
-   * Whether or not this argument requires a parameter
+   * Whether or not this Argument requires a parameter
    * value.
    */
   public bool paramRequired() const {
@@ -106,7 +106,7 @@ public class Argument {
   }
 
   /**
-   * Sets this argument to expect an optional value
+   * Sets this Argument to expect an optional value
    * parameter.
    */
   public Argument optionalParam() {
@@ -116,7 +116,7 @@ public class Argument {
   }
 
   /**
-   * Returns whether this argument has a parameter which is
+   * Returns whether this Argument has a parameter which is
    * optional.
    */
   public bool hasOptionalParam() const {

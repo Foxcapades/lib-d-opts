@@ -103,7 +103,7 @@ public class UnexpectedParameterException: Exception {
 }
 
 private string optName(const Argument opt) {
-  const bool l = opt.hasLongFrom();
+  const bool l = opt.hasLongFlag();
   const bool s = opt.hasShortFlag();
 
   if(l && s) {

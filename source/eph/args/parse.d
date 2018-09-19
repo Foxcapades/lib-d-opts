@@ -37,6 +37,9 @@ private enum State {
   DONE
 }
 
+/**
+ * Argument Parser
+ */
 public class ArgParser {
   private Argument[char] byShort;
   private Argument[string] byLong;
@@ -53,6 +56,10 @@ public class ArgParser {
 
   this() {}
 
+  /**
+   * Register arguments with this parser instance.
+   * Returns the current ArgParser instance.
+   */
   public ArgParser register(Argument[] opts...) {
     for(int i; i < opts.length; i++) {
       const char c = opts[i].shortFlag();
@@ -69,11 +76,18 @@ public class ArgParser {
     return this;
   }
 
+  /**
+   * Register parameters with this parser instance.
+   * Returns the current ArgParser instance.
+   */
   public ArgParser register(Parameter[] params...) {
     this.params ~= params;
     return this;
   }
 
+  /**
+   * Parse the command input string.
+   */
   public void parse(const string[] args) {
     debug(dOpts) printDebug(__FUNCTION__, args);
     for(int i = 1; i < args.length; i++) {
@@ -127,10 +141,18 @@ public class ArgParser {
     }
   }
 
+  /**
+   * Returns all parameters encountered in the command call
+   * that were not recognized by the parser.
+   */
   public string[] remainder() {
     return unknown;
   }
 
+  /**
+   * Returns all values passed to the command call after the
+   * appearance of "--" unchanged.
+   */
   public string[] passthrough() {
     return after;
   }
