@@ -61,9 +61,15 @@ public interface CliComponent(T : CliComponent) : ReadOnlyCliComponent {
    * Mars this CLI component as having been used in the CLI
    * call.
    */
-  package CliComponent!T markUsed();
+  public CliComponent!T markUsed();
 }
 
+/**
+ * Base implementation of a CLI component.
+ *
+ * @param T extending type.  Used for return types on
+ *          chainable methods.
+ */
 public abstract class AbstractCliComponent(T : AbstractCliComponent) : CliComponent!T {
   private string desc;
   private bool req;
@@ -95,8 +101,8 @@ public abstract class AbstractCliComponent(T : AbstractCliComponent) : CliCompon
   public override bool wasUsed() const {
     return this.used;
   }
-  
-  package override T markUsed() {
+
+  public override T markUsed() {
     this.used = true;
     return cast(T) this;
   }
