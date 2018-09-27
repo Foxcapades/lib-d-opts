@@ -8,8 +8,8 @@ import eph.cli.pp.iparse;
  * This is accomplished by copying the first character of
  * the input string.
  */
-public immutable class CharParam : ParamParser!char {
-  public override char param(const string val) const {
+public class CharParam : ParamParser!char {
+  public char parse(const string val) const {
     return val[0];
   }
 }

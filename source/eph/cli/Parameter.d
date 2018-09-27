@@ -1,6 +1,7 @@
 module eph.cli.parameter;
 
-import eph.cli.component;
+import eph.cli.base.rocomponent: ReadOnlyCliComponent;
+import eph.cli.base.component: CliComponent;
 
 /**
  * Read only access to a CLI positional parameter.
@@ -25,7 +26,7 @@ public interface ReadOnlyParameter(T) : ReadOnlyCliComponent {
   public T value() const;
 }
 
-public interface Parameter(T, S : Parameter!(T, S)) : ReadOnlyParameter!T, CliComponent!S {
-  public S name(const string val);
-  public S value(const string val);
+public interface Parameter(T) : ReadOnlyParameter!T, CliComponent {
+  public Parameter!T name(const string val);
+  public Parameter!T value(const string val);
 }

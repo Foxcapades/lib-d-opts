@@ -1,9 +1,10 @@
 module eph.cli.flag.ffloat;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp.iparse: ParamParser;
+import eph.cli.pp.pfloat: FloatParam;
 
-public class FloatFlag : AbstractFlag!(float, FloatFlag) {
+public class FloatFlag : AbstractFlag!float {
   private const ParamParser!float parser;
 
   public this(const ParamParser!float parser) {

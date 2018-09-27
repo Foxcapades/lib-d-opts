@@ -1,9 +1,9 @@
 module eph.cli.flag.freal;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp;
 
-public class RealFlag : AbstractFlag!(real, RealFlag) {
+public class RealFlag : AbstractFlag!real {
   private const ParamParser!real parser;
 
   public this(const ParamParser!real parser) {

@@ -1,9 +1,9 @@
 module eph.cli.flag.fbyte;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp;
 
-public class ByteFlag : AbstractFlag!(byte, ByteFlag) {
+public class ByteFlag : AbstractFlag!(byte) {
   private const ParamParser!byte parser;
 
   public this(const ParamParser!byte parser) {

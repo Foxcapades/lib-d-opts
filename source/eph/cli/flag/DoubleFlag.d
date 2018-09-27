@@ -1,9 +1,10 @@
 module eph.cli.flag.fdouble;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp.iparse: ParamParser;
+import eph.cli.pp.pdouble: DoubleParam;
 
-public class DoubleFlag : AbstractFlag!(double, DoubleFlag) {
+public class DoubleFlag : AbstractFlag!double {
   private const ParamParser!double parser;
 
   public this(const ParamParser!double parser) {

@@ -1,6 +1,6 @@
 module eph.cli.com.rocommand;
 
-import eph.cli.component;
+import eph.cli.base;
 import eph.cli.parameter;
 import eph.cli.flag;
 
@@ -20,22 +20,31 @@ import eph.cli.flag;
 public interface ReadOnlyCommand : ReadOnlyCliComponent {
 
   /**
-   * Gets this command's name.
+   * Returns this command's name.
    */
   public string name() const;
 
   /**
-   * Gets this command's parameters as read only.
+   * Returns this command's parameters as read only.
    */
-  public ReadOnlyParameter[] parameters() const;
+  public ReadOnlyParameter!void[] parameters() const;
 
   /**
-   * Gets this command's subcommands as read only.
+   * Returns this command's subcommands as read only.
    */
   public ReadOnlyCommand[] subCommands() const;
 
   /**
-   * Gets this command's flags as read only.
+   * Returns this command's flags as read only.
    */
-  public ReadOnlyFlag[] flags() const;
+  public ReadOnlyFlag!void[] flags() const;
+
+  /**
+   * Returns a read only handle for this Command's parent
+   * Command.
+   *
+   * If this is a root level Command, this method will
+   * return null.
+   */
+  public ReadOnlyCommand parent() const;
 }

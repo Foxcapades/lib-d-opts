@@ -1,9 +1,9 @@
 module eph.cli.flag.fchar;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp;
 
-public class CharFlag : AbstractFlag!(char, CharFlag) {
+public class CharFlag : AbstractFlag!(char) {
   private const ParamParser!char parser;
 
   public this(const ParamParser!char parser) {

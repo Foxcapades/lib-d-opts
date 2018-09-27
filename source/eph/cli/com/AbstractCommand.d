@@ -2,7 +2,8 @@ module eph.cli.com.base;
 
 import eph.cli.com.command;
 import eph.cli.com.rocommand;
-import eph.cli.component;
+
+import eph.cli.base;
 import eph.cli.parameter;
 import eph.cli.flag;
 
@@ -11,42 +12,79 @@ import eph.cli.flag;
  *
  * @param S extending class type
  */
-public abstract class AbstractCommand : AbstractCliComponent!Command, Command {
+public abstract class AbstractCommand : AbstractCliComponent, Command {
   private string comName;
-  private Parameter[] params;
+  private Parameter!void[] params;
   private Command[] subComs;
-  private Flag[] flgs;
+  private Flag!void[] flgs;
+  private Command par;
 
-  public override string name() const {
+  public string name() const {
     return this.comName;
   }
 
-  public override Command name(const string val) {
+  public Command name(const string val) {
     this.comName = val;
     return this;
   }
 
-  public override ReadOnlyParameter[] parameters() const {
-    return cast(ReadOnlyParameter[]) this.params;
+  public ReadOnlyParameter!void[] parameters() const {
+    return cast(ReadOnlyParameter!void[]) this.params;
   }
 
-  public override ReadOnlyCommand[] subCommands() const {
+  public ReadOnlyCommand[] subCommands() const {
     return cast(ReadOnlyCommand[]) this.subComs;
   }
 
-  public override ReadOnlyFlag[] flags() const {
-    return cast(ReadOnlyFlag[]) this.flgs;
+  public ReadOnlyFlag!void[] flags() const {
+    return cast(ReadOnlyFlag!void[]) this.flgs;
   }
 
-  public override Parameter[] mutParameters() const {
+  public Parameter!void[] mutParameters() {
     return this.params;
   }
 
-  public override Command[] mutSubCommands() const {
+  public Command[] mutSubCommands() {
     return this.subComs;
   }
 
-  public override Flag[] mutFlags() const {
+  public Flag!void[] mutFlags() {
     return this.flgs;
+  }
+
+  public Command append(CliComponent[] coms...) {
+    foreach(CliComponent c; coms) {
+      if (auto f = cast(Flag!void) c)
+        this.flgs ~= f;
+      else if (auto p = cast(Parameter!void) c)
+        this.params ~= p;
+      else if (auto m = cast(Command) c)
+        this.subComs ~= m;
+    }
+    return this;
+  }
+
+  public override Command description(const string val) {
+    return cast(Command) super.description(val);
+  }
+
+  public override Command isRequired(const bool val) {
+    return cast(Command) super.isRequired(val);
+  }
+
+  public override Command require() {
+    return cast(Command) super.require();
+  }
+
+  public override Command markUsed() {
+    return cast(Command) super.markUsed();
+  }
+
+  private void parent(Command par) {
+    this.par = par;
+  }
+
+  protected Command parent() {
+    return this.par;
   }
 }

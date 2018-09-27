@@ -1,14 +1,14 @@
 module eph.cli.com.command;
 
 import eph.cli.com.rocommand;
-import eph.cli.component;
+import eph.cli.base;
 import eph.cli.parameter;
 import eph.cli.flag;
 
 /**
  * CLI Command
  */
-public interface Command : ReadOnlyCommand, CliComponent!Command {
+public interface Command : ReadOnlyCommand, CliComponent {
 
   /**
    * Sets this command's name.
@@ -16,19 +16,24 @@ public interface Command : ReadOnlyCommand, CliComponent!Command {
   public Command name(const string name);
 
   /**
-   * Gets this command's parameters as mutable.
+   * Returns this command's parameters as mutable.
    */
-  public Parameter[] mutParameters() const;
+  public Parameter!void[] mutParameters();
 
   /**
-   * Gets this command's sub commands as mutable.
+   * Returns this command's sub commands as mutable.
    */
-  public Command[] mutSubCommands() const;
+  public Command[] mutSubCommands();
 
   /**
-   * Gets this command's flags as mutable.
+   * Returns this command's flags as mutable.
    */
-  public Flag[] mutFlags() const;
+  public Flag!void[] mutFlags();
+
+  /**
+   * Appends the given components to this Command.
+   */
+  public Command append(CliComponent[] coms...);
 
   /**
    * Execute this CLI command.

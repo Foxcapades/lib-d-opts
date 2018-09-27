@@ -1,12 +1,13 @@
 module eph.cli.pp.preal;
 
+import std.conv: to;
 import eph.cli.pp.iparse;
 
 /**
  * Parses the parameter string into a real value.
  */
-public immutable class RealParam : ParamParser!real {
-  public override real param(const string val) const {
-    return parse!real(val);
+public class RealParam : ParamParser!real {
+  public real parse(const string val) const {
+    return to!real(val);
   }
 }

@@ -1,17 +1,17 @@
 module eph.cli.flag.fuint;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp;
 
-public class UIntFlag : AbstractFlag!(uint, UIntFlag) {
-  private const ParamParser!uint parser;
+public class UIntFlag : AbstractFlag!uint {
+  private immutable ParamParser!uint parser;
 
-  public this(const ParamParser!uint parser) {
+  public this(immutable ParamParser!uint parser) {
     this.parser = parser;
   }
 
   public this() {
-    this.parser = new UIntParam();
+    this.parser = new immutable UIntParam();
   }
 
   protected override uint parse(const string val) const {

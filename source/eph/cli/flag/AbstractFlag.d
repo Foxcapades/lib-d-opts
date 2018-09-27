@@ -1,101 +1,130 @@
 module eph.cli.flag.base;
 
-import eph.cli.component;
-import eph.cli.flag.flag;
+import eph.cli.base.base: AbstractCliComponent;
+import eph.cli.flag.flag: Flag;
+import eph.cli.com.command: Command;
+import eph.cli.com.rocommand: ReadOnlyCommand;
 
 /**
  * @param T parsed parameter type
- * @param S extending class type
  */
-public abstract class AbstractFlag(T, S : AbstractFlag!(T, S)) : AbstractCliComponent!(Flag!T), Flag!T {
+public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
   private char sFlag;
   private string lFlag;
   private bool expVal;
   private bool reqVal;
   private T[] vals;
   private uint uses;
+  private Command par;
 
-  public override char shortFlag() const {
+  public char shortFlag() const {
     return this.sFlag;
   }
 
-  public override S shortFlag(const char val) {
+  public Flag!T shortFlag(const char val) {
     this.sFlag = val;
-    return cast(S) this;
+    return this;
   }
 
-  public override bool hasShortFlag() const {
+  public bool hasShortFlag() const {
     return sFlag == 0;
   }
 
-  public override string longFlag() const {
+  public string longFlag() const {
     return this.lFlag;
   }
 
-  public override S longFlag(const string val) {
+  public Flag!T longFlag(const string val) {
     this.lFlag = val;
-    return cast(S) this;
+    return this;
   }
 
-  public override bool hasLongFlag() const {
+  public bool hasLongFlag() const {
     return lFlag is null || lFlag == "";
   }
 
-  public override T[] values() const {
+  public T[] values() const {
+    return vals.dup;
+  }
+
+  public T[] mutValues() {
     return vals;
   }
 
-  protected abstract override T parse(const string val) const;
+  protected abstract T parse(const string val) const;
 
-  public override S appendValue(const string val) {
+  public Flag!T appendValue(const string val) {
     this.vals ~= this.parse(val);
     this.uses++;
-    return cast(S) this;
+    return this;
   }
 
-  public override bool expectsValue() const {
+  public bool expectsValue() const {
     return this.expVal;
   }
 
-  public override S expectValue() {
+  public Flag!T expectValue() {
     this.expVal = true;
-    return cast(S) this;
+    return this;
   }
 
-  public override S valueExpected(const bool val) {
+  public Flag!T valueExpected(const bool val) {
     this.expVal = val;
 
     if(!val)
       this.reqVal = false;
 
-    return cast(S) this;
+    return this;
   }
 
-  public override bool requiresValue() const {
+  public bool requiresValue() const {
     return this.reqVal;
   }
 
-  public override S requireValue() {
+  public Flag!T requireValue() {
     this.reqVal = true;
     this.expVal = true;
-    return cast(S) this;
+    return this;
   }
 
-  public override S valueRequired(const bool val) {
+  public Flag!T valueRequired(const bool val) {
     this.reqVal = val;
 
     if(val)
       this.expVal = true;
 
-    return cast(S) this;
+    return this;
   }
 
-  public override uint useCount() const {
+  public uint useCount() const {
     return this.uses;
   }
 
-  public override S markUsed() {
+  public override Flag!T description(const string val) {
+    return cast(Flag!T) super.description(val);
+  }
+
+  public override Flag!T isRequired(const bool val) {
+    return cast(Flag!T) super.isRequired(val);
+  }
+
+  public override Flag!T require() {
+    return cast(Flag!T) super.require();
+  }
+
+  public override Flag!T markUsed() {
     this.uses++;
-    return super.markUsed();
+    return  cast(Flag!T) super.markUsed();
+  }
+
+  public ReadOnlyCommand parent() const {
+    if (this.par is null)
+      return null;
+
+    return cast(ReadOnlyCommand) this.par;
+  }
+
+  public Command mutParent() {
+    return this.par;
   }
 }

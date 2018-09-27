@@ -1,54 +1,62 @@
 module eph.cli.flag.roflag;
 
-import eph.cli.component;
+import eph.cli.base.rocomponent: ReadOnlyCliComponent;
+import eph.cli.com.rocommand: ReadOnlyCommand;
 
 /**
  * Read only access to a CLI flag.
  *
  * @param T flag value type
  */
-public interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
+public const interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
   /**
-   * Gets the short form set on this cli flag.
+   * Returns the short form set on this cli flag.
    */
-  public char shortFlag() const;
+  public char shortFlag();
 
   /**
-   * Gets whether or not this cli flag has a short form.
+   * Returns whether or not this cli flag has a short form.
    */
-  public bool hasShortFlag() const;
+  public bool hasShortFlag();
 
   /**
-   * Gets the long form set on this cli flag.
+   * Returns the long form set on this cli flag.
    */
-  public string longFlag() const;
+  public string longFlag();
 
   /**
-   * Gets whether or not this cli flag has a long form.
+   * Returns whether or not this cli flag has a long form.
    */
-  public bool hasLongFlag() const;
+  public bool hasLongFlag();
 
   /**
-   * Gets the values passed for this flag in the CLI call.
+   * Returns the values passed for this flag in the CLI
+   * call.
    */
-  public T[] values() const;
+  public T[] values();
 
   /**
-   * Gets whether or not this CLI flag expects a value.
+   * Returns whether or not this CLI flag expects a value.
    */
-  public bool expectsValue() const;
+  public bool expectsValue();
 
   /**
-   * Gets whether or not this CLI flag requires a value.
+   * Returns whether or not this CLI flag requires a value.
    *
    * If this returns true, expectsValue() must also return
    * true.
    */
-  public bool requiresValue() const;
+  public bool requiresValue();
 
   /**
-   * Gets the number of times this flag was used in the CLI
-   * call.
+   * Returns a read only handle on this Flag's parent
+   * Command.
    */
-  public uint useCount() const;
+  public ReadOnlyCommand parent();
+
+  /**
+   * Returns the number of times this flag was used in the
+   * CLI call.
+   */
+  public uint useCount();
 }

@@ -1,9 +1,9 @@
 module eph.cli.flag.fushort;
 
-import eph.cli.flag.base;
-import eph.cli.paramparse;
+import eph.cli.flag.base: AbstractFlag;
+import eph.cli.pp;
 
-public class UShortFlag : AbstractFlag!(ushort, UShortFlag) {
+public class UShortFlag : AbstractFlag!ushort {
   private const ParamParser!ushort parser;
 
   public this(const ParamParser!ushort parser) {
