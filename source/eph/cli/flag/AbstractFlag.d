@@ -17,11 +17,11 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
   private uint uses;
   private Command par;
 
-  public char shortFlag() const {
+  public char getShortFlag() const {
     return this.sFlag;
   }
 
-  public Flag!T shortFlag(const char val) {
+  public Flag!T setShortFlag(const char val) {
     this.sFlag = val;
     return this;
   }
@@ -30,11 +30,11 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return sFlag == 0;
   }
 
-  public string longFlag() const {
+  public string getLongFlag() const {
     return this.lFlag;
   }
 
-  public Flag!T longFlag(const string val) {
+  public Flag!T setLongFlag(const string val) {
     this.lFlag = val;
     return this;
   }
@@ -43,11 +43,11 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return lFlag is null || lFlag == "";
   }
 
-  public T[] values() const {
+  public T[] getValues() const {
     return vals.dup;
   }
 
-  public T[] mutValues() {
+  public T[] getMutValues() {
     return vals;
   }
 
@@ -68,7 +68,7 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return this;
   }
 
-  public Flag!T valueExpected(const bool val) {
+  public Flag!T setValueExpected(const bool val) {
     this.expVal = val;
 
     if(!val)
@@ -87,7 +87,7 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return this;
   }
 
-  public Flag!T valueRequired(const bool val) {
+  public Flag!T setValueRequired(const bool val) {
     this.reqVal = val;
 
     if(val)
@@ -100,8 +100,8 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return this.uses;
   }
 
-  public override Flag!T description(const string val) {
-    return cast(Flag!T) super.description(val);
+  public override Flag!T setDescription(const string val) {
+    return cast(Flag!T) super.setDescription(val);
   }
 
   public override Flag!T isRequired(const bool val) {
@@ -117,14 +117,14 @@ public abstract class AbstractFlag(T) : AbstractCliComponent, Flag!T {
     return  cast(Flag!T) super.markUsed();
   }
 
-  public ReadOnlyCommand parent() const {
+  public ReadOnlyCommand getParent() const {
     if (this.par is null)
       return null;
 
     return cast(ReadOnlyCommand) this.par;
   }
 
-  public Command mutParent() {
+  public Command getMutParent() {
     return this.par;
   }
 }

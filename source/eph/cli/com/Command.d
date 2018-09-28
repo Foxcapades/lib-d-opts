@@ -1,9 +1,9 @@
 module eph.cli.com.command;
 
-import eph.cli.com.rocommand;
-import eph.cli.base;
-import eph.cli.parameter;
-import eph.cli.flag;
+import eph.cli.com.rocommand: ReadOnlyCommand;
+import eph.cli.base: CliComponent;
+import eph.cli.parameter: Parameter;
+import eph.cli.flag: Flag;
 
 /**
  * CLI Command
@@ -13,7 +13,7 @@ public interface Command : ReadOnlyCommand, CliComponent {
   /**
    * Sets this command's name.
    */
-  public Command name(const string name);
+  public Command setName(const string name);
 
   /**
    * Returns this command's parameters as mutable.

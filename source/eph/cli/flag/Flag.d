@@ -14,12 +14,12 @@ public interface Flag(T) : ReadOnlyFlag!T, CliComponent {
   /**
    * Sets the short form for this CLI flag.
    */
-  public Flag!T shortFlag(const char c);
+  public Flag!T setShortFlag(const char c);
 
   /**
    * Sets the long form for this CLI flag.
    */
-  public Flag!T longFlag(const string s);
+  public Flag!T setLongFlag(const string s);
 
   /**
    * Sets this flag as requring a value.
@@ -37,7 +37,7 @@ public interface Flag(T) : ReadOnlyFlag!T, CliComponent {
    * Setting this value to false will not stop this flag
    * from expecting a value.
    */
-  public Flag!T valueRequired(const bool val);
+  public Flag!T setValueRequired(const bool val);
 
   /**
    * Marks this flag as expecting a value.
@@ -47,7 +47,7 @@ public interface Flag(T) : ReadOnlyFlag!T, CliComponent {
   /**
    * Returns a mutable handle for this flags values.
    */
-  public T[] mutValues();
+  public T[] getMutValues();
 
   /**
    * Sets whether or not this flag expects a value.
@@ -55,7 +55,7 @@ public interface Flag(T) : ReadOnlyFlag!T, CliComponent {
    * Setting this value to false will also disable the
    * require value setting.
    */
-  public Flag!T valueExpected(const bool val);
+  public Flag!T setValueExpected(const bool val);
 
   /**
    * Appends a value to the internal value collection for
@@ -67,5 +67,5 @@ public interface Flag(T) : ReadOnlyFlag!T, CliComponent {
    * Returns a mutable handle for this Flag's parent
    * Command.
    */
-  public Command mutParent();
+  public Command getMutParent();
 }

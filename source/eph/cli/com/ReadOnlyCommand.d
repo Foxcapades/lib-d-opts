@@ -22,22 +22,22 @@ public interface ReadOnlyCommand : ReadOnlyCliComponent {
   /**
    * Returns this command's name.
    */
-  public string name() const;
+  public string getName() const;
 
   /**
    * Returns this command's parameters as read only.
    */
-  public ReadOnlyParameter!void[] parameters() const;
+  public ReadOnlyParameter!void[] getParameters() const;
 
   /**
    * Returns this command's subcommands as read only.
    */
-  public ReadOnlyCommand[] subCommands() const;
+  public ReadOnlyCommand[] getSubCommands() const;
 
   /**
    * Returns this command's flags as read only.
    */
-  public ReadOnlyFlag!void[] flags() const;
+  public ReadOnlyFlag!void[] getFlags() const;
 
   /**
    * Returns a read only handle for this Command's parent
@@ -46,5 +46,5 @@ public interface ReadOnlyCommand : ReadOnlyCliComponent {
    * If this is a root level Command, this method will
    * return null.
    */
-  public ReadOnlyCommand parent() const;
+  public ReadOnlyCommand getParent() const;
 }

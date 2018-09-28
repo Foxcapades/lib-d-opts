@@ -10,11 +10,11 @@ public abstract class AbstractCliComponent : CliComponent {
   private bool req;
   private bool used;
 
-  public string description() const {
+  public string getDescription() const {
     return desc;
   }
 
-  public CliComponent description(const string val) {
+  public CliComponent setDescription(const string val) {
     this.desc = val;
     return this;
   }

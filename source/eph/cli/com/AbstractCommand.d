@@ -19,36 +19,36 @@ public abstract class AbstractCommand : AbstractCliComponent, Command {
   private Flag!void[] flgs;
   private Command par;
 
-  public string name() const {
+  public string getName() const {
     return this.comName;
   }
 
-  public Command name(const string val) {
+  public Command setName(const string val) {
     this.comName = val;
     return this;
   }
 
-  public ReadOnlyParameter!void[] parameters() const {
+  public ReadOnlyParameter!void[] getParameters() const {
     return cast(ReadOnlyParameter!void[]) this.params;
   }
 
-  public ReadOnlyCommand[] subCommands() const {
+  public ReadOnlyCommand[] getSubCommands() const {
     return cast(ReadOnlyCommand[]) this.subComs;
   }
 
-  public ReadOnlyFlag!void[] flags() const {
+  public ReadOnlyFlag!void[] getFlags() const {
     return cast(ReadOnlyFlag!void[]) this.flgs;
   }
 
-  public Parameter!void[] mutParameters() {
+  public Parameter!void[] getMutParameters() {
     return this.params;
   }
 
-  public Command[] mutSubCommands() {
+  public Command[] getMutSubCommands() {
     return this.subComs;
   }
 
-  public Flag!void[] mutFlags() {
+  public Flag!void[] getMutFlags() {
     return this.flgs;
   }
 
@@ -64,8 +64,8 @@ public abstract class AbstractCommand : AbstractCliComponent, Command {
     return this;
   }
 
-  public override Command description(const string val) {
-    return cast(Command) super.description(val);
+  public override Command setDescription(const string val) {
+    return cast(Command) super.setDescription(val);
   }
 
   public override Command isRequired(const bool val) {
@@ -80,11 +80,11 @@ public abstract class AbstractCommand : AbstractCliComponent, Command {
     return cast(Command) super.markUsed();
   }
 
-  private void parent(Command par) {
+  private void setParent(Command par) {
     this.par = par;
   }
 
-  protected Command parent() {
+  protected Command getParent() {
     return this.par;
   }
 }

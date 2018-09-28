@@ -12,7 +12,7 @@ public const interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
   /**
    * Returns the short form set on this cli flag.
    */
-  public char shortFlag();
+  public char getShortFlag();
 
   /**
    * Returns whether or not this cli flag has a short form.
@@ -22,7 +22,7 @@ public const interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
   /**
    * Returns the long form set on this cli flag.
    */
-  public string longFlag();
+  public string getLongFlag();
 
   /**
    * Returns whether or not this cli flag has a long form.
@@ -33,7 +33,7 @@ public const interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
    * Returns the values passed for this flag in the CLI
    * call.
    */
-  public T[] values();
+  public T[] getValues();
 
   /**
    * Returns whether or not this CLI flag expects a value.
@@ -52,7 +52,7 @@ public const interface ReadOnlyFlag(T) : ReadOnlyCliComponent {
    * Returns a read only handle on this Flag's parent
    * Command.
    */
-  public ReadOnlyCommand parent();
+  public ReadOnlyCommand getParent();
 
   /**
    * Returns the number of times this flag was used in the

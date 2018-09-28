@@ -11,7 +11,7 @@ public interface ReadOnlyCliComponent {
    * it will be run through a formatter before printing to
    * the user.
    */
-  public string description() const;
+  public string getDescription() const;
 
   /**
    * Gets whether or not this CLI component is required.

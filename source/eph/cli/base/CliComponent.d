@@ -13,7 +13,7 @@ public interface CliComponent : ReadOnlyCliComponent {
    * it will be run through a formatter before printing to
    * the user.
    */
-  public CliComponent description(const string desc);
+  public CliComponent setDescription(const string desc);
 
   /**
    * Marks this component as required.
