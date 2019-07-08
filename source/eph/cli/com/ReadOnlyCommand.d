@@ -4,40 +4,51 @@ import eph.cli.base;
 import eph.cli.parameter;
 import eph.cli.flag;
 
-// public interface Arguments {
-//   public Flag[] usedFlags() const;
-//   public Flag[] unusedFlags() const;
-
-//   public Parameter[] usedParams() const;
-//   public Parameter[] unusedParams() const;
-
-//   public bool hasErrors() const;
-// }
-
 /**
  * Read only CLI Command accessor
  */
-public interface ReadOnlyCommand : ReadOnlyCliComponent {
+public interface ConstCommand:
+  // extends
+  ConstCliComponent
+{
 
   /**
    * Returns this command's name.
+   *
+   * @return
+   *   the name of this command
    */
   public string getName() const;
 
   /**
    * Returns this command's parameters as read only.
+   *
+   * TODO: Should this be returning a const or immutable typed collection?
+   *
+   * @return
+   *   collection of read only parameters
    */
   public ReadOnlyParameter!void[] getParameters() const;
 
   /**
    * Returns this command's subcommands as read only.
+   *
+   * TODO: Should this be returning a const or immutable typed collection?
+   *
+   * @return
+   *   collection of read only commands
    */
-  public ReadOnlyCommand[] getSubCommands() const;
+  public ConstCommand[] getSubCommands() const;
 
   /**
    * Returns this command's flags as read only.
+   *
+   * TODO: Should this be returning a const or immutable typed collection?
+   *
+   * @return
+   *   collection of read only flags
    */
-  public ReadOnlyFlag!void[] getFlags() const;
+  public ConstFlag!void[] getFlags() const;
 
   /**
    * Returns a read only handle for this Command's parent
@@ -45,6 +56,9 @@ public interface ReadOnlyCommand : ReadOnlyCliComponent {
    *
    * If this is a root level Command, this method will
    * return null.
+   *
+   * @return
+   *   constant reference to this command's parent (if any)
    */
-  public ReadOnlyCommand getParent() const;
+  public ConstCommand getParent() const;
 }

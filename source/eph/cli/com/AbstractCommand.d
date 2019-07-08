@@ -1,7 +1,7 @@
 module eph.cli.com.base;
 
-import eph.cli.com.command;
-import eph.cli.com.rocommand;
+import eph.cli.com.command: Command;
+import eph.cli.com.rocommand: ConstCommand;
 
 import eph.cli.base;
 import eph.cli.parameter;
@@ -9,35 +9,36 @@ import eph.cli.flag;
 
 /**
  * Abstract base for a Command
- *
- * @param S extending class type
  */
-public abstract class AbstractCommand : AbstractCliComponent, Command {
+public abstract class AbstractCommand
+// extends
+: AbstractCliComponent
+// implements
+, Command
+{
   private string comName;
   private Parameter!void[] params;
   private Command[] subComs;
   private Flag!void[] flgs;
   private Command par;
 
-  public string getName() const {
-    return this.comName;
-  }
+  public string getName() const
+  { return this.comName; }
 
-  public Command setName(const string val) {
+  public Command setName(const string val)
+  {
     this.comName = val;
     return this;
   }
 
-  public ReadOnlyParameter!void[] getParameters() const {
-    return cast(ReadOnlyParameter!void[]) this.params;
-  }
+  public ReadOnlyParameter!void[] getParameters() const
+  { return cast(ReadOnlyParameter!void[]) this.params; }
 
-  public ReadOnlyCommand[] getSubCommands() const {
-    return cast(ReadOnlyCommand[]) this.subComs;
-  }
+  public ConstCommand[] getSubCommands() const
+  { return cast(ConstCommand[]) this.subComs; }
 
-  public ReadOnlyFlag!void[] getFlags() const {
-    return cast(ReadOnlyFlag!void[]) this.flgs;
+  public ConstFlag!void[] getFlags() const {
+    return cast(ConstFlag!void[]) this.flgs;
   }
 
   public Parameter!void[] getMutParameters() {

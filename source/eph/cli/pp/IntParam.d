@@ -17,7 +17,14 @@ public class IntParam : ParamParser!(int) {
     this.radix = radix;
   }
 
-  public int parse(const string val) const{
+  /**
+   * Parses the given string value into a int value.
+   */
+  public int parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return to!int(val, radix);
   }
 }

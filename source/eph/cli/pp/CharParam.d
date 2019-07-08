@@ -9,7 +9,15 @@ import eph.cli.pp.iparse;
  * the input string.
  */
 public class CharParam : ParamParser!char {
-  public char parse(const string val) const {
+
+  /**
+   * Parses the given string value into a char value.
+   */
+  public char parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return val[0];
   }
 }

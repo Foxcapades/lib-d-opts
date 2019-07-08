@@ -4,6 +4,7 @@ module eph.cli.pp;
 public import eph.cli.pp.iparse;
 
 // Standard implementations
+public import eph.cli.pp.pbool;
 public import eph.cli.pp.pbyte;
 public import eph.cli.pp.pchar;
 public import eph.cli.pp.pdouble;

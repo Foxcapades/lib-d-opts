@@ -7,6 +7,7 @@ import eph.cli.pp.iparse;
  * Parses the parameter string into a uint value.
  */
 public class UIntParam : ParamParser!(uint) {
+
   private immutable uint radix;
 
   /**
@@ -17,7 +18,14 @@ public class UIntParam : ParamParser!(uint) {
     this.radix = radix;
   }
 
-  public uint parse(const string val) const {
+  /**
+   * Parses the given string value into a uint value.
+   */
+  public uint parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return to!uint(val);
   }
 }

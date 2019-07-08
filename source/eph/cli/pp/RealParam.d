@@ -7,7 +7,15 @@ import eph.cli.pp.iparse;
  * Parses the parameter string into a real value.
  */
 public class RealParam : ParamParser!real {
-  public real parse(const string val) const {
+
+  /**
+   * Parses the given string value into a real value.
+   */
+  public real parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return to!real(val);
   }
 }

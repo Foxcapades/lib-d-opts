@@ -3,7 +3,7 @@ module eph.cli.base.rocomponent;
 /**
  * Read only representation of a CLI flag or parameter.
  */
-public interface ReadOnlyCliComponent {
+public interface ConstCliComponent {
   /**
    * Gets this component's description / help text.
    *

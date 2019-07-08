@@ -7,6 +7,7 @@ import eph.cli.pp.iparse;
  * Parses the parameter string into a ulong value.
  */
 public class ULongParam : ParamParser!(ulong) {
+
   private immutable uint radix;
 
   /**
@@ -17,7 +18,14 @@ public class ULongParam : ParamParser!(ulong) {
     this.radix = radix;
   }
 
-  public ulong parse(const string val) const {
+  /**
+   * Parses the given string value into a ulong value.
+   */
+  public ulong parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return to!ulong(val, radix);
   }
 }

@@ -7,7 +7,15 @@ import eph.cli.pp.iparse;
  * string unchanged.
  */
 public class StringParam : ParamParser!string {
-  public string parse(const string val) const {
+
+  /**
+   * Parses the given string value into a string value.
+   */
+  public string parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return val.dup();
   }
 }

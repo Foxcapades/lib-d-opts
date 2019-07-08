@@ -5,7 +5,10 @@ import eph.cli.base.rocomponent;
 /**
  * Read/Write accessor for a CLI flag or parameter.
  */
-public interface CliComponent : ReadOnlyCliComponent {
+public interface CliComponent
+: ConstCliComponent
+{
+
   /**
    * Sets this component's description / help text.
    *
@@ -13,7 +16,7 @@ public interface CliComponent : ReadOnlyCliComponent {
    * it will be run through a formatter before printing to
    * the user.
    */
-  public CliComponent setDescription(const string desc);
+  public T setDescription(this T)(const string desc);
 
   /**
    * Marks this component as required.
@@ -21,7 +24,7 @@ public interface CliComponent : ReadOnlyCliComponent {
    * If this component is marked as required it will trigger
    * a parser error if it is not provided in the CLI call.
    */
-  public CliComponent require();
+  public T require(this T)();
 
   /**
    * Sets whether or not this CLI component is required.
@@ -29,11 +32,11 @@ public interface CliComponent : ReadOnlyCliComponent {
    * If this component is marked as required it will trigger
    * a parser error if it is not provided in the CLI call.
    */
-  public CliComponent isRequired(const bool req);
+  public T isRequired(this T)(const bool req);
 
   /**
-   * Mars this CLI component as having been used in the CLI
+   * Marks this CLI component as having been used in the CLI
    * call.
    */
-  public CliComponent markUsed();
+  public T markUsed(this T)();
 }

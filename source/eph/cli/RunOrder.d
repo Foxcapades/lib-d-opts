@@ -1,4 +1,4 @@
-module eph.cli.parser;
+module eph.cli.runOrder;
 
 import eph.cli.com.command: Command;
 import eph.cli.parameter: Parameter;
@@ -7,7 +7,8 @@ import eph.cli.parameter: Parameter;
  * Run is used with {@link App} to control how the
  * registered {@link Command}s will be run.
  */
-public enum Run {
+public enum RunOrder
+{
   /**
    * The START run mode sets the application to only call
    * the {@link Command#run()} method on the root Command
@@ -107,31 +108,3 @@ public enum Run {
   BOTTOM_UP
 }
 
-public class App {
-  private Command com;
-  private Run mode;
-
-  /**
-   * Sets the root Command for this application.
-   *
-   * The root Command's name will be ignored when parsing
-   * the CLI input as the command is tied to the binary's
-   * name.
-   */
-  public App command(Command com) {
-    this.com = com;
-    return this;
-  }
-
-  /**
-   * Sets the run mode for this application.
-   */
-  public App runMode(Run mode) {
-    this.mode = mode;
-    return this;
-  }
-
-  public int run(const string[] args) {
-    return 0;
-  }
-}

@@ -17,7 +17,14 @@ public class LongParam : ParamParser!(long) {
     this.radix = radix;
   }
 
-  public long parse(const string val) const {
+  /**
+   * Parses the given string value into a long value.
+   */
+  public long parse(const string val) const
+  in {
+    assert(val !is null);
+  }
+  do {
     return to!long(val, radix);
   }
 }

@@ -5,39 +5,51 @@ import eph.cli.base.component;
 /**
  * Base implementation of a CLI component.
  */
-public abstract class AbstractCliComponent : CliComponent {
+public abstract class AbstractCliComponent
+// implements
+: CliComponent
+{
   private string desc;
   private bool req;
   private bool used;
 
-  public string getDescription() const {
-    return desc;
-  }
+  /*⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺*\
+  ▏                                                        ▕
+  ▏ Default implementations of interface methods.          ▕
+  ▏                                                        ▕
+  \*⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯*/
 
-  public CliComponent setDescription(const string val) {
+  public string getDescription() const
+  { return desc; }
+
+  public T setDescription(this T)(const string val)
+  in(val !is null)
+  {
     this.desc = val;
     return this;
   }
 
-  public bool isRequired() const {
-    return req;
-  }
+  public bool isRequired() const
+  { return req; }
 
-  public CliComponent isRequired(const bool val) {
+  public T isRequired(this T)(const bool val)
+  {
     this.req = val;
     return this;
   }
 
-  public CliComponent require() {
+  public T require(this T)()
+  {
     this.req = true;
     return this;
   }
 
-  public bool wasUsed() const {
-    return this.used;
-  }
+  public bool wasUsed() const
+  { return this.used; }
 
-  public CliComponent markUsed() {
+  // CliComponent::markUsed
+  public T markUsed(this T)()
+  {
     this.used = true;
     return this;
   }
